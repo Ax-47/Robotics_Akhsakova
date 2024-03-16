@@ -4,6 +4,7 @@
 #include "DustSensor/DustSensor.h"
 #include "LightSensor/LightSensor.h"
 #include "Motor/Motor.h"
+#include "PCF8574.h"
 #include "UltraSonicSensor/UltraSonicSensor.h"
 #include <Adafruit_SSD1306.h>
 #define SCREEN_WIDTH 128
@@ -16,8 +17,9 @@ public:
 
 private:
   Adafruit_SSD1306 oled;
+  PCF8574 pcf8574;
   void oledInit();
-
+  void pcf8574Init();
   void akhsakov();
 };
 

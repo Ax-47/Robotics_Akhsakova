@@ -4,7 +4,7 @@
 #include <Arduino.h>
 #include <Wire.h>
 ESP32Akhsakova::ESP32Akhsakova()
-    : oled{SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, -1} {}
+    : oled{SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, -1}, pcf8574{0x20} {}
 
 void ESP32Akhsakova::oledInit() {
   if (!oled.begin(SSD1306_SWITCHCAPVCC, 0x3C)) {
@@ -12,8 +12,27 @@ void ESP32Akhsakova::oledInit() {
     while (1)
       ;
   }
-  delay(2000);               // wait two seconds for initializing
-  this->oled.clearDisplay(); // clear display
+}
+
+void ESP32Akhsakova::pcf8574Init() {
+  for (int i = 1; i < 3; i++)
+    this->pcf8574.pinMode(i, INPUT);
+
+  for (int i = 3; i < 6; i++)
+    this->pcf8574.pinMode(i, OUTPUT);
+  this->pcf8574.begin();
+  delay(2000);
+}
+
+void ESP32Akhsakova::akhsakov() {
+  bool isHigh = true;
+  for (int i = 0; i < 6; i++) {
+    for (int j = 3; j < 6; j++)
+      this->pcf8574.digitalWrite(j, (isHigh) ? HIGH : LOW);
+    isHigh = !isHigh;
+    delay(200);
+  }
+  this->oled.clearDisplay();
   this->oled.setTextSize(2);
   this->oled.setTextColor(WHITE);
   this->oled.setCursor(0, 10);
@@ -30,5 +49,6 @@ void ESP32Akhsakova::oledInit() {
 }
 void ESP32Akhsakova::Begin() {
   this->oledInit();
-  // this->akhsakov();
+  this->pcf8574Init();
+  this->akhsakov();
 }
