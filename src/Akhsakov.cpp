@@ -47,6 +47,21 @@ void ESP32Akhsakova::akhsakov() {
   this->oled.clearDisplay();
   this->oled.display();
 }
+Adafruit_SSD1306 *ESP32Akhsakova::GetOled() { return &this->oled; }
+PCF8574 *ESP32Akhsakova::GetPCF8574() { return &this->pcf8574; }
+int ESP32Akhsakova::GetValueBotton1() { return this->pcf8574.digitalRead(1); }
+int ESP32Akhsakova::GetValueBotton2() { return this->pcf8574.digitalRead(2); }
+void ESP32Akhsakova::SetLedGreen(int status) {
+  this->pcf8574.digitalWrite(3, status);
+}
+
+void ESP32Akhsakova::SetLedYellow(int status) {
+  this->pcf8574.digitalWrite(4, status);
+}
+void ESP32Akhsakova::SetLedRed(int status) {
+  this->pcf8574.digitalWrite(5, status);
+}
+
 void ESP32Akhsakova::Begin() {
   this->oledInit();
   this->pcf8574Init();

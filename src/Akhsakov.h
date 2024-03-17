@@ -9,11 +9,19 @@
 #include <Adafruit_SSD1306.h>
 #define SCREEN_WIDTH 128
 #define SCREEN_HEIGHT 64
-
+#define ON 0x01
+#define OFF 0x00
 class ESP32Akhsakova {
 public:
   ESP32Akhsakova();
   void Begin();
+  Adafruit_SSD1306 *GetOled();
+  PCF8574 *GetPCF8574();
+  int GetValueBotton1();
+  int GetValueBotton2();
+  void SetLedGreen(int status);
+  void SetLedYellow(int status);
+  void SetLedRed(int status);
 
 private:
   Adafruit_SSD1306 oled;
