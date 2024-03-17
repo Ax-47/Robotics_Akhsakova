@@ -4,7 +4,11 @@
 #include <Arduino.h>
 #include <Wire.h>
 ESP32Akhsakova::ESP32Akhsakova()
-    : oled{SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, -1}, pcf8574{0x20} {}
+    : oled{SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, -1}, pcf8574{0x20},
+      motor1(MOTOR1PIN1, MOTOR1PIN2, MOTOR1CH1, MOTOR1CH2),
+      motor2(MOTOR2PIN1, MOTOR2PIN2, MOTOR2CH1, MOTOR2CH2)
+
+{}
 
 void ESP32Akhsakova::oledInit() {
   if (!oled.begin(SSD1306_SWITCHCAPVCC, 0x3C)) {
@@ -54,16 +58,38 @@ int ESP32Akhsakova::GetValueBotton2() { return this->pcf8574.digitalRead(2); }
 void ESP32Akhsakova::SetLedGreen(int status) {
   this->pcf8574.digitalWrite(3, status);
 }
-
 void ESP32Akhsakova::SetLedYellow(int status) {
   this->pcf8574.digitalWrite(4, status);
 }
 void ESP32Akhsakova::SetLedRed(int status) {
   this->pcf8574.digitalWrite(5, status);
 }
+void ESP32Akhsakova::SetMotorSpeed(int _motor, int _speed) {
+  switch (_motor) {
+  case MOTOR1:
+    this->motor1.SetSpeed(_speed);
+    break;
+  case MOTOR2:
+    this->motor2.SetSpeed(_speed);
+    break;
+  case BOTH_MOTORS:
+    this->motor1.SetSpeed(_speed);
+    this->motor2.SetSpeed(_speed);
+    break;
+  case OPOSI_MOTORS:
 
+    this->motor1.SetSpeed(_speed);
+    this->motor2.SetSpeed(-1 * _speed);
+    break;
+  default:
+
+    break;
+  }
+}
 void ESP32Akhsakova::Begin() {
   this->oledInit();
   this->pcf8574Init();
   this->akhsakov();
+  this->motor1.Begin();
+  this->motor2.Begin();
 }

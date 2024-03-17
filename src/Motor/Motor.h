@@ -28,12 +28,15 @@
 
 class MotorAkhsakova {
 private:
-  int motor1;
-  int motor2;
+  int pin1;
+  int pin2;
+  int ch1;
+  int ch2;
 
 public:
-  MotorAkhsakova(int motor1, int motor2);
-  void Speed(int _speed);
+  MotorAkhsakova(int pin1, int pin2, int ch1, int ch2);
+  void Begin();
+  void SetSpeed(int _speed);
 };
 
 #endif
