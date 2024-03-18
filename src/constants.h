@@ -19,11 +19,11 @@
 #define BOTH_MOTORS 0x47
 #define OPOSI_MOTORS 0x74
 // Built-In sensors & switchess & output modules
-#define LIGHTSENSOR 35
-#define DHTPIN 4
+#define LIGHTSENSOR_PIN 35
+#define DHT_PIN 4
 #define DHTTYPE DHT11
-#define GURUGURU 27
-#define BUZZER 14
+#define GURUGURU_PIN 28
+#define BUZZER_PIN 14
 
 // GPIO
 #define INPUT1 34

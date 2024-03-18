@@ -1,6 +1,7 @@
 
 #ifndef AKHSAKOV
 #define AKHSAKOV
+#include "Buzzer/Buzzer.h"
 #include "DustSensor/DustSensor.h"
 #include "LightSensor/LightSensor.h"
 #include "Motor/Motor.h"
@@ -9,6 +10,7 @@
 #include "constants.h"
 #include <Adafruit_SSD1306.h>
 #include <DHT.h>
+// TODO DELETE FUCKING THIS
 class ESP32Akhsakova {
 public:
   ESP32Akhsakova();
@@ -17,6 +19,7 @@ public:
   PCF8574 *GetPCF8574();
   MotorAkhsakova *GetMotor1();
   MotorAkhsakova *GetMotor2();
+  BuzzerAkhsakova *GetBuzzer();
   DHT *GetDHT();
   LightSensorAkhsakova *GetLightSensor();
   int GetLightLevel();
@@ -34,6 +37,7 @@ private:
   MotorAkhsakova motor2;
   DHT dht;
   LightSensorAkhsakova lightSensor;
+  BuzzerAkhsakova buzzer;
   void oledInit();
   void pcf8574Init();
   void akhsakov();
