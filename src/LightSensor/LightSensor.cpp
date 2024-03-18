@@ -1,14 +1,6 @@
 #include "LightSensor.h"
 #include <Arduino.h>
-LightSensorAkhsakova::LightSensorAkhsakova(){
+LightSensorAkhsakova::LightSensorAkhsakova(int _pin) : pin(_pin) {}
 
-}
-
-
-void LightSensorAkhsakova::Begin(int _analogPin){
-  pinMode(_analogPin, INPUT);
-  this->analogPin = _analogPin;
-}
-int LightSensorAkhsakova::GetLightLevel(){
-  return analogRead(this->analogPin);
-}
+void LightSensorAkhsakova::Begin() { pinMode(this->pin, INPUT); }
+int LightSensorAkhsakova::GetLightLevel() { return analogRead(this->pin); }

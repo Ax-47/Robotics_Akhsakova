@@ -18,3 +18,24 @@
 #define MOTOR2 0x2
 #define BOTH_MOTORS 0x47
 #define OPOSI_MOTORS 0x74
+// Built-In sensors & switchess & output modules
+#define LIGHTSENSOR 35
+#define DHTPIN 4
+#define DHTTYPE DHT11
+#define GURUGURU 27
+#define BUZZER 14
+
+// GPIO
+#define INPUT1 34
+#define INPUT2 39
+#define INPUT3 36
+#define INPUT4 12
+#define INPUT5 13
+
+#define OUTPUT1 19
+#define OUTPUT2 18
+#define OUTPUT3 5
+#define OUTPUT4 2
+#define OUTPUT5 15
+#define OUTPUT6 17
+#define OUTPUT7 16

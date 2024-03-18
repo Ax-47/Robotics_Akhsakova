@@ -6,7 +6,8 @@
 ESP32Akhsakova::ESP32Akhsakova()
     : oled{SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, -1}, pcf8574{0x20},
       motor1(MOTOR1PIN1, MOTOR1PIN2, MOTOR1CH1, MOTOR1CH2),
-      motor2(MOTOR2PIN1, MOTOR2PIN2, MOTOR2CH1, MOTOR2CH2)
+      motor2(MOTOR2PIN1, MOTOR2PIN2, MOTOR2CH1, MOTOR2CH2),
+      dht(DHTPIN, DHTTYPE), lightSensor(LIGHTSENSOR)
 
 {}
 
@@ -53,8 +54,17 @@ void ESP32Akhsakova::akhsakov() {
 }
 Adafruit_SSD1306 *ESP32Akhsakova::GetOled() { return &this->oled; }
 PCF8574 *ESP32Akhsakova::GetPCF8574() { return &this->pcf8574; }
+DHT *ESP32Akhsakova::GetDHT() { return &this->dht; }
+MotorAkhsakova *ESP32Akhsakova::GetMotor1() { return &this->motor1; }
+MotorAkhsakova *ESP32Akhsakova::GetMotor2() { return &this->motor2; }
+LightSensorAkhsakova *ESP32Akhsakova::GetLightSensor() {
+  return &this->lightSensor;
+}
 int ESP32Akhsakova::GetValueBotton1() { return this->pcf8574.digitalRead(1); }
 int ESP32Akhsakova::GetValueBotton2() { return this->pcf8574.digitalRead(2); }
+int ESP32Akhsakova::GetLightLevel() {
+  return this->lightSensor.GetLightLevel();
+}
 void ESP32Akhsakova::SetLedGreen(int status) {
   this->pcf8574.digitalWrite(3, status);
 }
@@ -92,4 +102,6 @@ void ESP32Akhsakova::Begin() {
   this->akhsakov();
   this->motor1.Begin();
   this->motor2.Begin();
+  this->dht.begin();
+  this->lightSensor.Begin();
 }

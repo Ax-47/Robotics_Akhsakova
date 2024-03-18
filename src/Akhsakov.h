@@ -8,13 +8,18 @@
 #include "UltraSonicSensor/UltraSonicSensor.h"
 #include "constants.h"
 #include <Adafruit_SSD1306.h>
+#include <DHT.h>
 class ESP32Akhsakova {
 public:
   ESP32Akhsakova();
   void Begin();
   Adafruit_SSD1306 *GetOled();
   PCF8574 *GetPCF8574();
-  MotorAkhsakova *GetMotorAkhsakova();
+  MotorAkhsakova *GetMotor1();
+  MotorAkhsakova *GetMotor2();
+  DHT *GetDHT();
+  LightSensorAkhsakova *GetLightSensor();
+  int GetLightLevel();
   int GetValueBotton1();
   int GetValueBotton2();
   void SetLedGreen(int status);
@@ -27,6 +32,8 @@ private:
   PCF8574 pcf8574;
   MotorAkhsakova motor1;
   MotorAkhsakova motor2;
+  DHT dht;
+  LightSensorAkhsakova lightSensor;
   void oledInit();
   void pcf8574Init();
   void akhsakov();
