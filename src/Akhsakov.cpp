@@ -12,7 +12,7 @@ ESP32Akhsakova::ESP32Akhsakova()
 {}
 
 void ESP32Akhsakova::oledInit() {
-  if (!oled.begin(SSD1306_SWITCHCAPVCC, 0x3C)) {
+  if (!this->oled.begin(SSD1306_SWITCHCAPVCC, 0x3C)) {
     Serial.println(F("failed to start SSD1306 OLED"));
     while (1)
       ;
@@ -106,4 +106,5 @@ void ESP32Akhsakova::Begin() {
   this->dht.begin();
   this->lightSensor.Begin();
   this->buzzer.Begin();
+  this->StructureBegin();
 }

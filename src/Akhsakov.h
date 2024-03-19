@@ -6,12 +6,13 @@
 #include "LightSensor/LightSensor.h"
 #include "Motor/Motor.h"
 #include "PCF8574.h"
+#include "Structure.h"
 #include "UltraSonicSensor/UltraSonicSensor.h"
 #include "constants.h"
 #include <Adafruit_SSD1306.h>
 #include <DHT.h>
 // TODO DELETE FUCKING THIS
-class ESP32Akhsakova {
+class ESP32Akhsakova : public StructureAkhsakova {
 public:
   ESP32Akhsakova();
   void Begin();
